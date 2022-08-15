@@ -1,0 +1,23 @@
+---
+# This docker-compose file is ignoring in production, but been using
+# in development with: $ docker-compose up
+
+version: "3.9"
+services:
+#  postgresql-service:
+#    container_name: express-postgres-dev
+#    network_mode: host
+#    environment:
+#      POSTGRES_HOST_AUTH_METHOD: trust
+#    build:
+#      context: .
+#      dockerfile: ./docker/postgresql/Dockerfile
+  mongodb-service:
+    image: mongo:4.4.15
+    ports:
+      - "27017:27017"
+    #volumes:
+    #  - ~/apps/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
