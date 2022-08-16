@@ -79,6 +79,18 @@ Content-Type: application/json
   "tags": ["react", "node", "mern", "js"]
 }
 
+### Load file
+POST http://localhost:4444/upload/ HTTP/1.1
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZiNjE5ZWIwOTFlOWQyZWExODk5NjciLCJpYXQiOjE2NjA2NDQyNjUsImV4cCI6MTY2MzIzNjI2NX0.uDlKv3zChfZbUQPyWKuBMXifixGdSwXztlL4hDeDGe0
+Accept: application/json
+
+--WebAppBoundary
+Content-Disposition: form-data; name="image"; filename="image.svg"
+Content-Type: application/svg+xml
+
+< /home/ramil/Desktop/image.svg
+--WebAppBoundary
 
 
 

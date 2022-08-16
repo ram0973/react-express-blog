@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
-import {jwtSuperSecret} from "../index.js";
+import {JWT_SUPER_SECRET} from "../index.js";
 
 export default (req, res, next) => {
   const token = (req.headers.authorization || '').replace(/Bearer\s?/, '');
   if (token) {
     try {
-      const decoded = jwt.verify(token, jwtSuperSecret, {}, null);
+      const decoded = jwt.verify(token, JWT_SUPER_SECRET, {}, null);
 
       req.userId = decoded._id;
       next();

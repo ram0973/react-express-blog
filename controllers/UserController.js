@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 import UserModel from '../models/UserModel.js';
-import {jwtSuperSecret} from "../index.js";
+import {JWT_SUPER_SECRET} from "../index.js";
 
 export const register = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ export const register = async (req, res) => {
       {
         _id: user._id,
       },
-      jwtSuperSecret,
+      JWT_SUPER_SECRET,
       {
         expiresIn: '30d',
       },
@@ -65,7 +65,7 @@ export const login = async (req, res) => {
       {
         _id: user._id,
       },
-      jwtSuperSecret,
+      JWT_SUPER_SECRET,
       {
         expiresIn: '30d',
       },
