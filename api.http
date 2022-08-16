@@ -5,14 +5,84 @@ Content-Type: application/json
 
 {
   "email": "ram0973@gmail.com",
-  "password": 123123,
+  "password": "123123",
   "fullName": "Kung-fu Panda",
   "avatarUrl": "http://yandex.ru/images/avatar.jpg"
 }
 
-### Get users
+### Login
+POST http://localhost:4444/auth/login/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "ram0973@gmail.com",
+  "password": "123123"
+}
+
+### Get me
+GET http://localhost:4444/auth/me/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZiNjE5ZWIwOTFlOWQyZWExODk5NjciLCJpYXQiOjE2NjA2NDQyNjUsImV4cCI6MTY2MzIzNjI2NX0.uDlKv3zChfZbUQPyWKuBMXifixGdSwXztlL4hDeDGe0
+Accept: application/json
+Content-Type: application/json
+
+{
+  "email": "ram0973@gmail.com",
+  "password": "123123"
+}
+
+### Get /
 GET http://localhost:4444/
 Accept: application/json
+
+
+#app.get('/posts/tags', PostController.getLastTags);
+#app.get('/posts/:id', PostController.getOne);
+#app.delete('/posts/:id', checkAuth, PostController.remove);
+#//app.patch('/posts/:id',  checkAuth,  postCreateValidation,  handleValidationErrors,  PostController.update);
+
+### Get post
+GET http://localhost:4444/posts/62fb7208fed8a43536012d3b
+Accept: application/json
+
+### Get posts
+GET http://localhost:4444/posts/
+Accept: application/json
+
+### Create post
+POST http://localhost:4444/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZiNjE5ZWIwOTFlOWQyZWExODk5NjciLCJpYXQiOjE2NjA2NDQyNjUsImV4cCI6MTY2MzIzNjI2NX0.uDlKv3zChfZbUQPyWKuBMXifixGdSwXztlL4hDeDGe0
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "The first post title",
+  "text": "First Post text",
+  "imageUrl": "/images/image/jpg",
+  "tags": ["react", "node", "mern"]
+}
+
+### Delete post
+DELETE http://localhost:4444/posts/62fb7208fed8a43536012d3b
+Accept: application/json
+
+### Patch post
+PATCH http://localhost:4444/posts/62fb7b18d82e3d90e2793752
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZiNjE5ZWIwOTFlOWQyZWExODk5NjciLCJpYXQiOjE2NjA2NDQyNjUsImV4cCI6MTY2MzIzNjI2NX0.uDlKv3zChfZbUQPyWKuBMXifixGdSwXztlL4hDeDGe0
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "The first post changed",
+  "text": "Post text changed 123",
+  "imageUrl": "/images/image/jpg",
+  "tags": ["react", "node", "mern", "js"]
+}
+
+
+
+
+############################################ OTHER EXAMPLES #####################################################
 
 ### Basic authorization.
 GET https://httpbin.org/basic-auth/user/passwd
