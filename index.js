@@ -11,6 +11,7 @@ import cors from "cors";
 
 export const JWT_SUPER_SECRET = 'JWT_SUPER_SECRET';
 const MONGO_URI = "mongodb://mongo:mongo@localhost:27017/express?authSource=admin";
+const NODE_EXPRESS_PORT = 4444;
 
 mongoose
   .connect(process.env.MONGODB_URI || MONGO_URI)
@@ -57,7 +58,7 @@ app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, Post
 app.delete('/posts/:id', checkAuth, PostController.remove);
 app.patch('/posts/:id',  checkAuth,  postCreateValidation, handleValidationErrors, PostController.update);
 
-app.listen(process.env.PORT || 4444, (err) => {
+app.listen(process.env.PORT || NODE_EXPRESS_PORT, (err) => {
   if (err) {
     console.log(err);
     return err;

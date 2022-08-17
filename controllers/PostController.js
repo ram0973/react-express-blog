@@ -57,7 +57,6 @@ export const getOne = async (req, res) => {
             message: 'Статья не найдена',
           });
         }
-
         res.json(doc);
       },
     ).populate('user');
