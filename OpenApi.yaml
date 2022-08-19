@@ -14,7 +14,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: https://backend.yabbarov.ru/api/v1
+  - url: http://localhost:4444/api
 tags:
   - name: articles
     description: Operations with Articles (Markdown)
@@ -24,7 +24,38 @@ tags:
   - name: users
     description: Operations with users
 paths:
+  /articles/active:
+    get:
+      tags:
+        - articles
+      summary: Get active articles
+      description: Get all active articles
+      operationId: getArticles
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+      security: [ ]
   /articles:
+    get:
+      tags:
+        - articles
+      summary: Get articles
+      description: Get all articles
+      operationId: getArticles
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+      security:
+        - springapp_auth:
+            - read:articles
     put:
       tags:
         - articles
@@ -35,9 +66,6 @@ paths:
         description: Update an existent Article
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/Article'
-          application/xml:
             schema:
               $ref: '#/components/schemas/Article'
           application/x-www-form-urlencoded:
@@ -51,9 +79,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Article'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Article'
         '400':
           description: Invalid ID supplied
         '404':
@@ -61,7 +86,7 @@ paths:
         '405':
           description: Validation exception
       security:
-        - article_auth:
+        - springapp_auth:
             - write:articles
             - read:articles
     post:
@@ -76,9 +101,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Article'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Article'
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/Article'
@@ -90,13 +112,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Article'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Article'
         '405':
           description: Invalid input
       security:
-        - article_auth:
+        - springapp_auth:
             - write:articles
             - read:articles
   /articles/findByStatus:
@@ -128,15 +147,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Article'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Article'
         '400':
           description: Invalid status value
       security:
-        - articlestore_auth:
+        - springapp_auth:
             - write:articles
             - read:articles
   /articles/findByTags:
@@ -165,15 +179,10 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Article'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Article'
         '400':
           description: Invalid tag value
       security:
-        - articlestore_auth:
+        - springapp_auth:
             - write:articles
             - read:articles
   /articles/{articleId}:
@@ -198,16 +207,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Article'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Article'
         '400':
           description: Invalid ID supplied
         '404':
           description: Article not found
       security:
-        - api_key: []
-        - articlestore_auth:
+        - springapp_auth:
             - write:articles
             - read:articles
     patch:
@@ -238,7 +243,7 @@ paths:
         '405':
           description: Invalid input
       security:
-        - articlestore_auth:
+        - springapp_auth:
             - write:articles
             - read:articles
     delete:
@@ -248,12 +253,6 @@ paths:
       description: delete a article
       operationId: deleteArticle
       parameters:
-        - name: api_key
-          in: header
-          description: ''
-          required: false
-          schema:
-            type: string
         - name: articleId
           in: path
           description: Article id to delete
@@ -265,7 +264,7 @@ paths:
         '400':
           description: Invalid article value
       security:
-        - article_auth:
+        - springapp_auth:
             - write:articles
             - read:articles
   /articles/{articleId}/uploadImage:
@@ -303,7 +302,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ApiResponse'
       security:
-        - articlestore_auth:
+        - springapp_auth:
             - write:articles
             - read:articles
   /users:
@@ -317,9 +316,6 @@ paths:
         description: Created user object
         content:
           application/json:
-            schema:
-              $ref: '#/components/schemas/User'
-          application/xml:
             schema:
               $ref: '#/components/schemas/User'
           application/x-www-form-urlencoded:
@@ -370,9 +366,6 @@ paths:
                 type: string
                 format: date-time
           content:
-            application/xml:
-              schema:
-                type: string
             application/json:
               schema:
                 type: string
@@ -436,9 +429,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/User'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/User'
           application/x-www-form-urlencoded:
             schema:
               $ref: '#/components/schemas/User'
@@ -474,7 +464,7 @@ components:
           example: 1
         name:
           type: string
-          example: Dogs
+          example: React
       xml:
         name: category
     User:
@@ -497,9 +487,6 @@ components:
           type: string
           example: john@email.com
         password:
-          type: string
-          example: '12345'
-        phone:
           type: string
           example: '12345'
         userStatus:
@@ -576,9 +563,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Article'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/Article'
     UserArray:
       description: List of user object
       content:
@@ -588,7 +572,7 @@ components:
             items:
               $ref: '#/components/schemas/User'
   securitySchemes:
-    article_Auth:
-      type: apiKey
-      name: api_key
-      in: header
+    springapp_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
