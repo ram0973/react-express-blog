@@ -42,7 +42,7 @@ Accept: application/json
 #//app.patch('/posts/:id',  checkAuth,  postCreateValidation,  handleValidationErrors,  PostController.update);
 
 ### Get post
-GET http://localhost:4444/posts/62fb7208fed8a43536012d3b
+GET http://localhost:4444/articles/6302408e60e3b130ce075086
 Accept: application/json
 
 ### Get posts
@@ -50,16 +50,17 @@ GET http://localhost:4444/posts/
 Accept: application/json
 
 ### Create post
-POST http://localhost:4444/posts
+POST http://localhost:4444/api/articles
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZiNjE5ZWIwOTFlOWQyZWExODk5NjciLCJpYXQiOjE2NjA2NDQyNjUsImV4cCI6MTY2MzIzNjI2NX0.uDlKv3zChfZbUQPyWKuBMXifixGdSwXztlL4hDeDGe0
 Accept: application/json
 Content-Type: application/json
 
 {
-  "title": "The first post title",
-  "text": "First Post text",
+  "title": "The fourth post title",
+  "text": "Fourth Post text",
+
   "imageUrl": "/images/image/jpg",
-  "tags": ["react", "node", "mern"]
+  "tags": ["java", "spring", "idea"]
 }
 
 ### Delete post
