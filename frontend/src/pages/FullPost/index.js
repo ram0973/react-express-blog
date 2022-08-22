@@ -18,7 +18,7 @@ export const FullPost = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.warn(err);
+        console.log(err);
       });
   }, []);
 

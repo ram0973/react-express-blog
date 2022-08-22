@@ -8,8 +8,20 @@ import {FullPost} from "./pages/FullPost";
 import AddPost from "./pages/AddPost";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchAuthMe, selectIsAuth} from "./redux/slices/auth";
 
 function App() {
+  const dispatch = useDispatch();
+  const isAuth = useSelector(selectIsAuth);
+
+  React.useEffect(
+    ()=>{
+      dispatch(fetchAuthMe());
+    },
+    []
+  );
+
   return (
     <>
       <Header/>
