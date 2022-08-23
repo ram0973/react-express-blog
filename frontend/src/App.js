@@ -5,7 +5,7 @@ import {Route, Routes} from "react-router-dom";
 import {Home} from "./pages/Home";
 import {Header} from "./components/Header";
 import {FullPost} from "./pages/FullPost";
-import AddPost from "./pages/AddPost";
+import {AddPost} from "./pages/AddPost";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import {useDispatch, useSelector} from "react-redux";
